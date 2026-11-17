@@ -17,6 +17,18 @@ app.get('/math/circle/:r', (req, res) => {
   res.json(result);
 });
 
+app.get('/math/rectangle/:width/:height', (req, res) => {
+//TODO1  
+  const w = req.param("width");
+  const h = req.param("height");
+  const area = w * h;
+  const per = w * 2 + h * 2;
+  const result = {area: area, perimeter: per}
+  res.json(result);
+});
+
+
+
 //TODO2
 
 
