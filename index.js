@@ -9,30 +9,43 @@ function Round2(num) {
 
 // define endpoint for exercise 1 here
 app.get('/math/circle/:r', (req, res) => {
-//TODO1  
   const r = req.param("r");
   const area = Round2(r * r * Math.PI);
   const circ = Round2(r * 2 * Math.PI);
-  const result = {area: area, circumference: circ}
+  const result = {area: area, circumference: circ};
   res.json(result);
 });
 
-app.get('/math/rectangle/:width/:height', (req, res) => {
-//TODO1  
+app.get('/math/rectangle/:width/:height', (req, res) => { 
   const w = req.param("width");
   const h = req.param("height");
   const area = w * h;
   const per = w * 2 + h * 2;
-  const result = {area: area, perimeter: per}
+  const result = {area: area, perimeter: per};
+  res.json(result);
+});
+
+app.get('/math/power/:base/:exponent', (req, res) => { 
+  const b = req.param("base");
+  const e = req.param("exponent");
+  const r = req.param("root");
+  const re = Math.pow(b, e);
+  const ro = Round2( Math.sqrt(b) );
+  let result;
+  if(isNaN(b) || isNaN(e)){
+    result = {error: "Invalid input"};  
+  }
+  else{
+    if(r == "true")
+      result = {result: re, root: ro};
+    else
+      result = {result: re};
+  }
+    
   res.json(result);
 });
 
 
-
-//TODO2
-
-
-//TODO3
 
 
 const PORT = process.env.PORT || 3000;
