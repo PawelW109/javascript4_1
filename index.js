@@ -10,18 +10,30 @@ function Round2(num) {
 // define endpoint for exercise 1 here
 app.get('/math/circle/:r', (req, res) => {
   const r = req.param("r");
-  const area = Round2(r * r * Math.PI);
-  const circ = Round2(r * 2 * Math.PI);
-  const result = {area: area, circumference: circ};
+  let result;
+  if(r > 0){
+    const area = Round2(r * r * Math.PI);
+    const circ = Round2(r * 2 * Math.PI);
+    result = {area: area, circumference: circ};
+  }
+  else{
+    result = {error: "Invalid input"};
+  }
   res.json(result);
 });
 
 app.get('/math/rectangle/:width/:height', (req, res) => { 
   const w = req.param("width");
   const h = req.param("height");
-  const area = w * h;
-  const per = w * 2 + h * 2;
-  const result = {area: area, perimeter: per};
+  let result;
+  if(w > 0 && h > 0){
+    const area = w * h;
+    const per = w * 2 + h * 2;
+    result = {area: area, perimeter: per};
+  }
+  else{
+    result = {error: "Invalid input"};
+  }
   res.json(result);
 });
 
