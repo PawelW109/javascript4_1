@@ -116,6 +116,29 @@ app.get('/math/gcdlcm/:a/:b', (req, res) => {
 });
 
 
+app.get('/math/average', (req, res) => { 
+  const nums = req.query.nums;
+  if(!nums){
+    return res.status(400).json({
+        error: "Invalid input"
+    });
+  }
+
+  const numbers = nums.split(',').map(Number);
+  let a = 0, g = 1, h = 0;
+  
+  let l = numbers.length;
+  let n; 
+  for(let i = 0; i < l; i++){
+    n = numbers[i];
+    a += n;
+    g *= n;
+    h += 1/n;
+  }
+  res.json({arithmetic: a / l, geometric: Math.pow(g, 1/l), harmonic: l / h});
+});
+
+
 
 
 const PORT = process.env.PORT || 3000;
