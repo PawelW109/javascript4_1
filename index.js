@@ -58,6 +58,28 @@ app.get('/math/power/:base/:exponent', (req, res) => {
 });
 
 
+function isPrime(num){
+  if(num < 2)
+    return false;
+  const s = Math.sqrt(num);
+  for(let n = 2; n <= s; n++){
+    if(num % n == 0)
+      return false;
+  }
+  return true;
+}
+
+app.get('/math/isprime/:n', (req, res) => { 
+  const n = req.param("n");
+  let result;
+  if(isNaN(n)){
+    return res.status(400).json({
+        error: "Invalid input"
+    });
+  }
+  const p =isPrime(n);
+  res.json({number: n, isPrime: p});
+});
 
 
 const PORT = process.env.PORT || 3000;
